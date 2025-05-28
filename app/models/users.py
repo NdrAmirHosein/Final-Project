@@ -1,15 +1,20 @@
+from utils.encryption import Password
 from data_structures.stack import Stack
 
 
 
 class User:
-    def __init__(self, name, lName, birthday, nationalCode):
+    def __init__(self, name, lName, birthday, nationalCode, password):
+
+        if len(nationalCode) != 10:
+            raise ValueError("\nNational Code Must Be 10 Numbers\n")
+        
         self.name = name
         self.l_name = lName
         self.birthday = birthday
         self.national_code = nationalCode
         self.username = nationalCode
-        self.password = None
+        self.password = Password(password).encryption()
 
 
         self.driver = None
