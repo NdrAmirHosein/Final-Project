@@ -45,6 +45,8 @@ class BinarySearchTree:
         else:
             raise IndexError("\nNot Such A Data is Available\n")
         
+
+        
     def successor(self, node):
         y = node.right
         while y.left:
@@ -57,42 +59,83 @@ class BinarySearchTree:
         node = self.search(value)
         parent = node.parent
 
-        if node.rihgt is None and node.left is None:
-            if parent.left.value == value:
+        if parent is None:
+            if node.left is None and node.right is None:
+                self.root = None
+                del node
+                return True
+            elif node.left is None:
+                self.root = node.right
+                self.root.parent = None
+                del node
+                return True
+            elif node.right is None:
+                self.root = node.left
+                self.root.parent = None
+                del node
+                return True
+
+        if node.right is None and node.left is None:
+            if parent.left == node:
                 parent.left = None
                 del node
                 return True
-            elif parent.right.value == value:
+            elif parent.right == node:
                 parent.right = None
                 del node
                 return True
         
-        if node.right and node.left is None:
-            if parent.right.value == value:
+        elif node.right and node.left is None:
+            if parent.right == node:
                 parent.right = node.right
                 del node
                 return True
-            elif parent.left.value == value:
+            elif parent.left == node:
                 parent.left = node.right
                 del node
                 return True
-        if node.left and node.right is None:
-            if parent.right.value == value:
+            
+        elif node.left and node.right is None:
+            if parent.right == node:
                 parent.right = node.left
                 del node
                 return True
-            elif parent.left.value == value:
+            elif parent.left == node:
                 parent.left = node.left
                 del node
                 return True
-        if node.right and node.left:
-            pass # need to be correct also for root
+            
+        elif node.left and node.right:
+            succ = self.successor(node)
+            node.value = succ.value
+            if succ.parent.left == succ:
+                succ.parent.left = succ.right
+                if succ.right:
+                    succ.right.parent = succ.parent
+            else:
+                succ.parent.right = succ.right
+                if succ.right:
+                    succ.right.parent = succ.parent
+            del succ
+            return True
 
-        
+
+    def preorder(self, root):
+        if root is not None:
+            print(root.value)
+            self.preorder(root.left)
+            self.preorder(root.right)
+
 
     def inorder(self, root):
         if root is not None:
-            self.inorder(self.left)
-            print(root.data)
-            self.inorder(self.right)
-
+            self.inorder(root.left)
+            print(root.value)
+            self.inorder(root.right)
+    
+    def postorder(self, root):
+        if root is not None:
+            self.postorder(root.left)
+            self.postorder(root.right)
+            print(root.value)
+    
