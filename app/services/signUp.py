@@ -1,5 +1,4 @@
-from app.models.users import User
-from app.Database.usersDatabase import usersDatabase
+from app.handler.signUp import setData
 def signUp():
     try:
         name = input("\nEnter Your Name: ")
@@ -7,8 +6,8 @@ def signUp():
         birthday = input("\nEnter Your Biarthday:(YYYY-MM-DD) ")
         nationalCode = (input("\nPlease Enter Your National Code: "))
         password = input("\nPlease Enter Your Password: ")
-        
+        setData(name, lName, birthday, nationalCode, password)
     except ValueError as e:
         print(e)
     
-    
+    return True

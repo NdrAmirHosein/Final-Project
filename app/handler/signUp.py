@@ -1,5 +1,6 @@
 from app.Database.usersDatabase import usersDatabase
 from app.models.users import User
+from datetime import datetime
 import bcrypt as bc
 
 
@@ -31,15 +32,23 @@ def isPasswordValid(password):
         else:
             raise ValueError("\nPassword Must Contains Numbers\n")
         
-
+def check_birthday_format(birthday):
+    try:
+        datetime.strptime(birthday, "%Y-%m-%d")
+        return True
+    except ValueError:
+        raise ValueError("\nBirthday must be in YYYY-MM-DD format\n")
+    
+def change_type_birthday(birthday_str):
+    return datetime.strptime(birthday_str, "%Y-%m-%d").date()
     
 
 def encryption(password):
-    if isPasswordValid():
-        encrypted_password = bc.hashpw(str(password).encode('utf-8'), bc.gensalt())
-        return encrypted_password
+    encrypted_password = bc.hashpw(str(password).encode('utf-8'), bc.gensalt())
+    return encrypted_password
 
 def setData(name, lName, birthday, nationalCode, password):
-    if check_nationalCode(nationalCode) and check_len(password) and isPasswordValid(password):
-        data = User(name, lName, birthday, nationalCode, encryption(password))
-        usersDatabase.setUser(nationalCode, data)
+    if check_nationalCode(nationalCode) and check_len(password) and isPasswordValid(password) and check_birthday_format(birthday):
+        data = User(name, lName, change_type_birthday(birthday), nationalCode, encryption(password))
+        db = usersDatabase()
+        db.setUser(data.national_code, data)
