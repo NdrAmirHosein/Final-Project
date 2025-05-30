@@ -1,4 +1,3 @@
-from app.utils.encryption import Password
 from app.data_structures.stack import Stack
 
 
@@ -13,7 +12,7 @@ class User:
         self.birthday = birthday
         self.national_code = nationalCode
         self.username = nationalCode
-        self.password = Password(password).encryption()
+        self.password = password
 
 
         self.driver = None
