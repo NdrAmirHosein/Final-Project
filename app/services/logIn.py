@@ -8,8 +8,7 @@ def login():
         print(e)
 
 
-    if check[0]:
-        print(f"   Login successful! Welcome {check[1]}\n")
+    if check:
         return True
     else:
-        print("\nError Log in...!\nPassWord IS Wrong!\n")
+        print("\n      Error Log in...!\nUsername Or PassWord IS Wrong!\n")
