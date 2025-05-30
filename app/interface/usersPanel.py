@@ -1,13 +1,12 @@
-from app.services.signUp import signUp
-
 def userPanel():
     while True:
-        print("1. SignUp")
-        print("2. Exit")
+        print("   ...User Panel...  ")
+        print("1. functionalties")
+        print("2. exit")
 
         choice = input("Enter Your Choice: ")
+
         if choice == "1":
-            if signUp():
-                print("done")
+            pass
         elif choice == "2":
             break

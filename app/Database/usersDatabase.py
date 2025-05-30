@@ -9,9 +9,12 @@ class usersDatabase:
     
     def __init__(self):
         if not hasattr(self, 'initialized'):
+            self.initialized = True
             self.userDatabase = HashTable()
             
     def setUser(self, nationalCode, data):
         self.userDatabase[nationalCode] = data
         print(f"\n  Signup successful! Welcome {data.name}\n")
     
+    def getUser(self, nationalCode):
+        return self.userDatabase[nationalCode]
