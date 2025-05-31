@@ -1,4 +1,5 @@
 from app.data_structures.stack import Stack
+from app.data_structures.array import Array
 
 
 class User:
@@ -19,7 +20,7 @@ class User:
         self.owner = None
 
 
-        # cars_owned = 
+        self.cars_owned = Array()
 
 class Driver(User):
     def __init__(self, name, l_name, birthday, national_code, licenseId, licenseIssueDate):

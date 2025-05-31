@@ -1,10 +1,11 @@
-from data_structures.array import Array
+from app.data_structures.array import Array
 
 class plate:
     def __init__(self, plateNumber, cityCode, letter):
         self.plateNumber = plateNumber
         self.cityCode = cityCode
         self.letter = letter
+        self.plate = f"{self.plateNumber[:2]} {self.letter} {self.plateNumber[2:]} - {self.cityCode}"
 
         
         self.active = False
