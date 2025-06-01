@@ -6,8 +6,9 @@ def signUp():
         birthday = input("\nEnter Your Biarthday:(YYYY-MM-DD) ")
         nationalCode = (input("\nPlease Enter Your National Code: "))
         password = input("\nPlease Enter Your Password: ")
-        setData(name, lName, birthday, nationalCode, password)
+        if setData(name, lName, birthday, nationalCode, password):
+            return nationalCode
+        else:
+            return None
     except ValueError as e:
         print(e)
-    
-    return True

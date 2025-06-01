@@ -1,4 +1,4 @@
-from app.Database.usersDatabase import usersDatabase
+from app.Database.users_database import usersDatabase
 from app.models.users import User
 from datetime import datetime
 import bcrypt as bc
@@ -52,3 +52,4 @@ def setData(name, lName, birthday, nationalCode, password):
         data = User(name, lName, change_type_birthday(birthday), nationalCode, encryption(password))
         db = usersDatabase()
         db.setUser(data.national_code, data)
+    return True

@@ -10,10 +10,12 @@ def costumerPanel():
 
         choice = input("Enter Your Choice: ")
         if choice == "1":
-            if signUp():
-                userPanel()
+            nationalCode = signUp()
+            if nationalCode:
+                userPanel(nationalCode)
         elif choice == "2":
-            if login():
-                userPanel()
+            nationalCode = login()
+            if nationalCode:
+                userPanel(nationalCode)
         elif choice == "3":
             break

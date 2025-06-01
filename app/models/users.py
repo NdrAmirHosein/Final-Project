@@ -21,6 +21,7 @@ class User:
 
 
         self.cars_owned = Array()
+        self.plate_owned = Array()
 
 class Driver(User):
     def __init__(self, name, l_name, birthday, national_code, licenseId, licenseIssueDate):

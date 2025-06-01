@@ -7,8 +7,7 @@ def login():
     except ValueError as e:
         print(e)
 
-
     if check:
-        return True
+        return national_code
     else:
         print("\n      Error Log in...!\nUsername Or PassWord IS Wrong!\n")

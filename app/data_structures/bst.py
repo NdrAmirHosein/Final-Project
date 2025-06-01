@@ -1,6 +1,12 @@
+from typing import NamedTuple, Any
+
+class Value(NamedTuple):
+    key : Any
+    value : Any
+
 class BSTNode:
-    def __init__(self, value):
-        self.value = value
+    def __init__(self, key, value):
+        self.value = Value(key, value)
         self.parent = None
         self.right = None
         self.left = None
@@ -10,22 +16,22 @@ class BinarySearchTree:
     def __init__(self):
         self.root = None
     
-    def insert(self, value):
+    def insert(self, key, value):
         if self.root == None:
-            self.root = BSTNode(value)
+            self.root = BSTNode(key, value)
             return
         pointer = self.root
         while True:
-            if pointer.value < value:
+            if pointer.value.key < key:
                 if pointer.right is None:
-                    pointer.rihgt = BSTNode(value)
+                    pointer.right = BSTNode(key, value)
                     pointer.right.parent = pointer
                     return
                 else:
                     pointer = pointer.right
             else:
                 if pointer.left is None:
-                    pointer.left = BSTNode(value)
+                    pointer.left = BSTNode(key, value)
                     pointer.left.parent = pointer
                     return
                 else:
@@ -36,9 +42,9 @@ class BinarySearchTree:
     def search(self, value):
         pointer = self.root
         while pointer:
-            if pointer.value == value:
+            if pointer.value.key == value:
                 return pointer
-            if pointer.value > value:
+            if pointer.value.key > value:
                 pointer = pointer.left
             else:
                 pointer = pointer.right
@@ -122,20 +128,30 @@ class BinarySearchTree:
 
     def preorder(self, root):
         if root is not None:
-            print(root.value)
+            print(root.value.key)
             self.preorder(root.left)
             self.preorder(root.right)
+    def _preorder(self):
+        self.preorder(self.root)
+        return ""
 
 
     def inorder(self, root):
         if root is not None:
             self.inorder(root.left)
-            print(root.value)
+            print(root.value.key)
             self.inorder(root.right)
+    def _inorder(self):
+        self.inorder(self.root)
     
+
     def postorder(self, root):
         if root is not None:
             self.postorder(root.left)
             self.postorder(root.right)
-            print(root.value)
+            print(root.value.key)
+        
+    def _postorder(self):
+        self.postorder(self.root)
+        
     

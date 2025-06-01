@@ -1,5 +1,5 @@
 from app.services.generateplate import generatePlate
-def userPanel():
+def userPanel(nationalCode):
     while True:
         print("   ...User Panel...  ")
         print("1. Generate Plate")
@@ -8,6 +8,6 @@ def userPanel():
         choice = input("Enter Your Choice: ")
 
         if choice == "1":
-            generatePlate()
+            generatePlate(nationalCode)
         elif choice == "2":
             break
