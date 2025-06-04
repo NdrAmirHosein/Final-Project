@@ -1,10 +1,16 @@
 from app.Database.users_database import usersDatabase
+from app.models.carHistory import carHistory
+from app.Database.cars_database import cars
 from app.handler.plate_to_object import _plat
-def setOwnership(nationalCode, carId, startDate, EndDtae, PlateNumber):
+
+def setOwnership(nationalCode, carId, PlateNumber, startDate, endDate):
     db = usersDatabase()
 
     user = db.getUser(nationalCode)
     plate = _plat(PlateNumber)
-    user.cars_owned.append((carId, startDate, EndDtae, plate))
+    _car_history = carHistory(carId, nationalCode, plate, startDate, endDate)
+    user.cars_owned.append(_car_history)
 
-    print(user.cars_owned)
+
+def setCars(carId, carName, year, plateNumber, color, ownerNationalId):
+    pass

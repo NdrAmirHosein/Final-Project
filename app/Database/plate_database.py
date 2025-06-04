@@ -22,4 +22,7 @@ class arrayBST:
         if self.array[cityCode] is None:
             self.array[cityCode] = BinarySearchTree()
         self.array[cityCode].insert(plate, obj_plate)
-        print(self.array[cityCode]._preorder())
+
+    def get_plate(self, city_code, plate):
+        return self.array[city_code].search(plate).value.value
+    

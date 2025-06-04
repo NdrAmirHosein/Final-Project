@@ -97,3 +97,15 @@ def check_cityCode_and_set_Plate(cityCode, nationalCode):
     else:
         raise ValueError("\nError...!\nCity Code Is Invalide\n")
 
+
+
+def set_plate_first_time(cityCode, nationalCode, raw_plate, obj_plate):
+    index = array_index_generator(cityCode)
+    db = usersDatabase()
+    user = db.getUser(nationalCode)
+    user_plate_history = user.plate_owned
+    if obj_plate not in user_plate_history:
+        user.plate_owned.append(obj_plate)
+    plate_db = arrayBST()
+    plate_db.insert_plate(index, raw_plate, obj_plate)
+    

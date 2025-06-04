@@ -1,5 +1,5 @@
 from app.interface.costumerPanel import costumerPanel
-
+from app.interface.admin_interface import adminlogin
 
 def interface():
     while True:
@@ -10,7 +10,7 @@ def interface():
         if choice == "1":
             costumerPanel()
         elif choice == "2":
-            pass
+            adminlogin()
         elif choice == "3":
             break
         else:

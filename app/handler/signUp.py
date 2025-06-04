@@ -49,7 +49,9 @@ def encryption(password):
 
 def setData(name, lName, birthday, nationalCode, password):
     if check_nationalCode(nationalCode) and check_len(password) and isPasswordValid(password) and check_birthday_format(birthday):
-        data = User(name, lName, change_type_birthday(birthday), nationalCode, encryption(password))
+        # data = User(name, lName, change_type_birthday(birthday), nationalCode, encryption(password))
+        data = User(name, lName, birthday, nationalCode, password)
+
         db = usersDatabase()
         db.setUser(data.national_code, data)
     return True
