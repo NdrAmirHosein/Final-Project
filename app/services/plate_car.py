@@ -6,13 +6,7 @@ def plate_car(carId, carName, year, plate_number, color, ownerNationalID):
     
 
 
-def check_input_color():
-    try:
-        print("Enter Vehicle Color: ")
-        print("WT : White\nBC : Black\nRD : Red\nBL : Blue\nGR : Silver or Gray\nOT : Other")
-        color = input()
-    except ValueError as e:
-        print(e)
+def check_input_color(color):
 
     if color == "WT" or color =="BC" or color =="RD" or color =="BL" or color =="GR" or color =="OT":
         return color

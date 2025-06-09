@@ -33,7 +33,10 @@ def adminPage(username, password):
                 carName = input("Enter Vehicle Name: ")
                 year = input("Enter The Date Of Manufacture Of Vehicle: ")
                 plate_number = input("Enter License Plate Number: ")
-                color = check_input_color()
+                print("Enter Vehicle Color: ")
+                print("WT : White\nBC : Black\nRD : Red\nBL : Blue\nGR : Silver or Gray\nOT : Other")
+                color = input()
+                color = check_input_color(color)
                 ownerNationalID = input("Enter The Owner Nationial ID: ")
             except ValueError as e:
                 print(e)
