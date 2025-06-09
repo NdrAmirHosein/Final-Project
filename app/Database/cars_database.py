@@ -13,5 +13,8 @@ class cars:
             self.initialized = True
             self.cars = BinarySearchTree()
 
-    def set_cars(self, carId, obj_car):
+    def set_cars(self, carId:int, obj_car):
         self.cars.insert(carId, obj_car)
+    
+    def find(self, carId):
+        return self.cars.search(carId).value.value

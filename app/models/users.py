@@ -5,9 +5,6 @@ from app.data_structures.array import Array
 class User:
     def __init__(self, name, lName, birthday, nationalCode, password):
 
-        # if len(nationalCode) != 10:
-        #     raise ValueError("\nNational Code Must Be 10 Numbers\n")
-        
         self.name = name
         self.l_name = lName
         self.birthday = birthday

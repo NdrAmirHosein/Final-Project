@@ -53,5 +53,5 @@ def setData(name, lName, birthday, nationalCode, password):
         data = User(name, lName, birthday, nationalCode, password)
 
         db = usersDatabase()
-        db.setUser(data.national_code, data)
-    return True
+        if db.setUser(data.national_code, data):
+            return data.name

@@ -4,20 +4,19 @@ from app.models.carHistory import carHistory
 from app.Database.cars_database import cars
 from app.Database.plate_database import arrayBST
 from app.Database.users_database import usersDatabase
-from app.handler.set_ownership_cars import setOwnership
 from app.handler.plate_to_object import _plat
 
 def time():
     current_time = datetime.now()
     return current_time.date()
 
-def find_plate(plate):
+def find_plate_and_activation(plate):
     plate = _plat(plate)
     plate_db = arrayBST()
     obj_plate = plate_db.get_plate((int(plate.cityCode) // 10), plate.plate)
 
     if obj_plate.plate == plate.plate and obj_plate.active == False:
-        return obj_plate # plak moojod boode va mitavand sabt shavad
+        return obj_plate # plak moojod boode va gheyr faal asst. mitavand sabt shavad
     else:
         raise ValueError("\nPlate Is Not Valid\n")
 
@@ -35,15 +34,19 @@ def check_careDate_and_sys(carYear):
 
 def append_car_history(user_obj, car_Id, owner_id, plate_obj):
     for history in user_obj.cars_owned:
-        if history.endDate:
-            if int(history.carId) == int(car_Id):
+        if int(history.carId) == int(car_Id):
+            if history.endDate:
                 user_obj.cars_owned.append(
                     carHistory(car_Id, owner_id, plate_obj, history.endDate)
                 )
-        else:
-            user_obj.cars_owned.append(
-                carHistory(car_Id, owner_id, plate_obj, time())
+            else:
+                user_obj.cars_owned.append(
+                    carHistory(car_Id, owner_id, plate_obj, time())
             )
+                
+    user_obj.cars_owned.append(
+            carHistory(car_Id, owner_id, plate_obj, time())
+    )
 
 def insert_car(car_db, carName, year, carId, plate_obj, color, ownedID):
     car_db.set_cars(
@@ -61,7 +64,7 @@ def change_palte_atrr_and_history(plate_obj, carId, year):
 
 def set_plate(carId, carName, year, plate_number, color, ownerNationalId):
     check_year = check_careDate_and_sys(year)
-    plate_obj = find_plate(plate_number)
+    plate_obj = find_plate_and_activation(plate_number)
     if not plate_obj and not check_year:
         return False
 
@@ -73,4 +76,4 @@ def set_plate(carId, carName, year, plate_number, color, ownerNationalId):
     change_palte_atrr_and_history(plate_obj, carId, check_year)
     insert_car(car_db, carName, year, carId, plate_obj, color, ownerNationalId)
 
-    return f"Plate ({plate_obj.plate}) Dedicated To Car {carName} For User: {user_obj.name} {user_obj.l_name}"
+    return plate_obj.plate ,user_obj.name, user_obj.l_name

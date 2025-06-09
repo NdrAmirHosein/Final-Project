@@ -44,7 +44,7 @@ class BinarySearchTree:
         while pointer:
             if pointer.value.key == value:
                 return pointer
-            if pointer.value.key > value:
+            if pointer.value.key >= value:
                 pointer = pointer.left
             else:
                 pointer = pointer.right

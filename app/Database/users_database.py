@@ -14,7 +14,7 @@ class usersDatabase:
             
     def setUser(self, nationalCode, data):
         self.userDatabase[nationalCode] = data
-        print(f"\n  Signup successful! Welcome {data.name}\n")
+        return True
     
     def getUser(self, nationalCode):
         return self.userDatabase[nationalCode]

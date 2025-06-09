@@ -1,4 +1,4 @@
-from app.services.plate_car import plate_car
+from app.services.plate_car import *
 
 def adminlogin():
     while True:
@@ -28,6 +28,20 @@ def adminPage(username, password):
         choice = input("Enter Your Choice: ")
 
         if choice == "1":
-            plate_car()
+            try:
+                carId = check_carId()
+                carName = input("Enter Vehicle Name: ")
+                year = input("Enter The Date Of Manufacture Of Vehicle: ")
+                plate_number = input("Enter License Plate Number: ")
+                color = check_input_color()
+                ownerNationalID = input("Enter The Owner Nationial ID: ")
+            except ValueError as e:
+                print(e)
+
+            datas = plate_car(carId, carName, year, plate_number, color, ownerNationalID)
+            if datas:
+                print(f"Plate ({datas[0]}) Dedicated To Car {carName} For User: {datas[1]} {datas[2]}")
+                
+                    
         elif choice == "2":
             break
