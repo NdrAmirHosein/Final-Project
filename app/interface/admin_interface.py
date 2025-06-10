@@ -1,3 +1,4 @@
+from app.services.display_all_registered_cars_and_users import *
 from app.services.plate_car import *
 
 def adminlogin():
@@ -23,7 +24,9 @@ def adminPage(username, password):
     
     while True:
         print("1. Plate A Car")
-        print("2. Exit")
+        print("2. Display All Registerd Cars")
+        print("3. Display All Users")
+        print("4. Exit")
 
         choice = input("Enter Your Choice: ")
 
@@ -44,7 +47,18 @@ def adminPage(username, password):
             datas = plate_car(carId, carName, year, plate_number, color, ownerNationalID)
             if datas:
                 print(f"Plate ({datas[0]}) Dedicated To Car {carName} For User: {datas[1]} {datas[2]}")
-                
-                    
+
         elif choice == "2":
+            obj_cars = all_registered_cars()
+            print("Car Name  ---  ID  ---  Plate  ---  Year")
+            for car in obj_cars:
+                print(car.name,"---",car.vehicleId, "---", car.plateNumber.plate, "---",car.productionYear)  
+        
+        elif choice == "3":
+            obj_users = all_registered_users()
+            print("First Name  ---  Last Name  ---  National Code")
+            for user in obj_users:
+                print(user.name,"  ---  ", user.l_name, "  ---  ", user.national_code)
+        elif choice == "4":
             break
+        

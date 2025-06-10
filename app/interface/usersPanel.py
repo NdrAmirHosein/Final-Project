@@ -1,4 +1,4 @@
-from app.services.View_registered_vehicles import show_cars_ownd
+from app.services.View_registered_vehicles_and_plates import *
 from app.services.generateplate import generatePlate
 
 def userPanel(nationalCode):
@@ -6,7 +6,8 @@ def userPanel(nationalCode):
         print("   ...User Panel...  ")
         print("1. Generate Plate")
         print("2. View Registered Vehicles")
-        print("3. exit")
+        print("3. View Plates Owned")
+        print("4. exit")
 
         choice = input("Enter Your Choice: ")
 
@@ -22,8 +23,15 @@ def userPanel(nationalCode):
         
         elif choice == "2":
             cars = show_cars_ownd(nationalCode)
+            print("CarId --- Car Name --- Color --- Car Plate")
             for car in cars:
-                print(car.vehicleId, car.name)
+                print(car.vehicleId,"---", car.name,"---", car.color,"---", car.plateNumber.plate)
 
         elif choice == "3":
+            print("Plates Owned:\nPlates    ----      Status")
+            plates = plate_owned(nationalCode)
+            for plate in plates:
+                print(plate.plate, " ---> ", plate.active)
+
+        elif choice == "4":
             break

@@ -32,3 +32,16 @@ def car_objs(nationalId):
             )
     
     return car_objs
+
+def plates_owned(nationalId):
+    user_db = usersDatabase()
+    user = user_db.getUser(nationalId)
+    plates_owned = user.plate_owned
+    return plates_owned
+
+
+
+def plate_objs(nationalId):
+    plates = plates_owned(nationalId)
+    return plates
+

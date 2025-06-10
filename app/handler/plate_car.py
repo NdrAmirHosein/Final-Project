@@ -65,7 +65,7 @@ def change_palte_atrr_and_history(plate_obj, carId, year):
 def set_plate(carId, carName, year, plate_number, color, ownerNationalId):
     check_year = check_careDate_and_sys(year)
     plate_obj = find_plate_and_activation(plate_number)
-    if not plate_obj and not check_year:
+    if not plate_obj or not check_year:
         return False
 
     car_db = cars()

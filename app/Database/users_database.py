@@ -10,11 +10,11 @@ class usersDatabase:
     def __init__(self):
         if not hasattr(self, 'initialized'):
             self.initialized = True
-            self.userDatabase = HashTable()
+            self.usersDatabase = HashTable()
             
     def setUser(self, nationalCode, data):
-        self.userDatabase[nationalCode] = data
+        self.usersDatabase[nationalCode] = data
         return True
     
     def getUser(self, nationalCode):
-        return self.userDatabase[nationalCode]
+        return self.usersDatabase[nationalCode]

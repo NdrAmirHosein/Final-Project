@@ -1,4 +1,5 @@
 from typing import NamedTuple, Any
+from app.data_structures.array import Array
 
 class Value(NamedTuple):
     key : Any
@@ -126,32 +127,46 @@ class BinarySearchTree:
             return True
 
 
-    def preorder(self, root):
+    def preorder(self, root, preOrder=None):
+        if preOrder is None:
+            preOrder = Array()
         if root is not None:
-            print(root.value.key)
-            self.preorder(root.left)
-            self.preorder(root.right)
+            preOrder.append(
+                root.value.value
+            )
+            self.preorder(root.left, preOrder)
+            self.preorder(root.right, preOrder)
+
+        return preOrder
+
     def _preorder(self):
-        self.preorder(self.root)
-        return ""
+        return self.preorder(self.root)
 
 
-    def inorder(self, root):
+    def inorder(self, root, inOrder=None):
+        if inOrder is None:
+            inOrder = Array()
         if root is not None:
-            self.inorder(root.left)
-            print(root.value.key)
-            self.inorder(root.right)
+            self.inorder(root.left, inOrder)
+            inOrder.append(
+                root.value.value
+            )
+            self.inorder(root.right, inOrder)
+        return inOrder
     def _inorder(self):
-        self.inorder(self.root)
+        return self.inorder(self.root)
     
 
-    def postorder(self, root):
+    def postorder(self, root, postOrder=None):
+        if postOrder is None:
+            postOrder = Array()
         if root is not None:
-            self.postorder(root.left)
-            self.postorder(root.right)
-            print(root.value.key)
-        
+            self.postorder(root.left, postOrder)
+            self.postorder(root.right, postOrder)
+            postOrder.append(
+                root.value.value
+            )
+        return postOrder
     def _postorder(self):
-        self.postorder(self.root)
+        return self.postorder(self.root)
         
-    
