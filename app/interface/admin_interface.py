@@ -1,4 +1,4 @@
-from app.services.display_all_registered_cars_and_users import *
+from app.services.retrive_cars_plates_users_information import *
 from app.services.plate_car import *
 
 def adminlogin():
@@ -26,7 +26,9 @@ def adminPage(username, password):
         print("1. Plate A Car")
         print("2. Display All Registerd Cars")
         print("3. Display All Users")
-        print("4. Exit")
+        print("4. Diaplay All Plates Of A City")
+        print("5. Display All Cars Of A City")
+        print("6. Exit")
 
         choice = input("Enter Your Choice: ")
 
@@ -56,9 +58,34 @@ def adminPage(username, password):
         
         elif choice == "3":
             obj_users = all_registered_users()
-            print("First Name  ---  Last Name  ---  National Code")
+            print("First Name  ---  Last Name  ---  National Code\n")
             for user in obj_users:
                 print(user.name,"  ---  ", user.l_name, "  ---  ", user.national_code)
-        elif choice == "4":
-            break
         
+        elif choice == "4":
+            try:
+                
+                print("11 | Tehran\n22 | Mashhad\n31 | Isfahan\n44 | Tabriz\n51 | Shiraz\n61 | Ahvaz\n71 | Qom\n81 | Kermanshah\n91 | Urmia")
+                city_code = int(input("Enter City Code: "))
+            except ValueError as e:
+                print(e)
+
+            obj_plates = all_plates_of_city(city_code)
+            print("Plates  ---  Status")
+            for plate in obj_plates:
+                print(plate.plate, plate.active)
+        
+        elif choice == "5":
+            try:
+                print("11 | Tehran\n22 | Mashhad\n31 | Isfahan\n44 | Tabriz\n51 | Shiraz\n61 | Ahvaz\n71 | Qom\n81 | Kermanshah\n91 | Urmia")
+                city_code = int(input("Enter City Code: "))
+            except ValueError as e:
+                print(e)
+
+            obj_cars = all_cars_of_city(city_code)
+            print("Plate --- Name --- ID --- Color --- Owner Natinoal ID")
+            for car in obj_cars:
+                print(car.plateNumber.plate, "---", car.name, "---", car.vehicleId, "---", car.color, "---", car.ownerNationalId)
+
+        elif choice == "6":
+            break

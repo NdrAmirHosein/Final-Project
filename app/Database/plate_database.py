@@ -26,3 +26,6 @@ class arrayBST:
     def get_plate(self, city_code, plate):
         return self.array[city_code].search(plate).value.value
     
+    def retrive_information(self, city_code) -> Array:
+        return self.array[city_code]._preorder()
+    
