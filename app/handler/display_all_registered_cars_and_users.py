@@ -11,6 +11,10 @@ def retrive_users_from_db():
     users = usersDatabase().usersDatabase
     return users.values
 
+def get_one_user(national_code):
+    users_db = usersDatabase()
+    return users_db.getUser(national_code)
+
 
 def plates_of_city(city_code):
 

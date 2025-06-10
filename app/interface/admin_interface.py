@@ -28,7 +28,10 @@ def adminPage(username, password):
         print("3. Display All Users")
         print("4. Diaplay All Plates Of A City")
         print("5. Display All Cars Of A City")
-        print("6. Exit")
+        print("6. Search Cars In Rnage Of Production Year")
+        print("7. Display All Owners Of A City")
+        print("8  Set New Name For User")
+        print("9. Exit")
 
         choice = input("Enter Your Choice: ")
 
@@ -86,6 +89,34 @@ def adminPage(username, password):
             print("Plate --- Name --- ID --- Color --- Owner Natinoal ID")
             for car in obj_cars:
                 print(car.plateNumber.plate, "---", car.name, "---", car.vehicleId, "---", car.color, "---", car.ownerNationalId)
-
         elif choice == "6":
+            try:
+                startDate = input("Enter Your Start Date(YYYY): ")
+                endDate = input("Enter Your End Date(YYYY): ")
+            except ValueError as e:
+                print(e)
+            obj_cars = search_in_range(startDate, endDate)
+            for car in obj_cars:
+                print(car.name, "---", car.productionYear, "---", car.color, "---", car.plateNumber.plate)
+
+        elif choice == "7":
+            try:
+                print("11 | Tehran\n22 | Mashhad\n31 | Isfahan\n44 | Tabriz\n51 | Shiraz\n61 | Ahvaz\n71 | Qom\n81 | Kermanshah\n91 | Urmia")
+                city_code = int(input("Enter City Code: "))
+            except ValueError as e:
+                print(e)
+            
+            obj_users = owners_of_city(city_code)
+            for user in obj_users:
+                print(user.name, "---", user.l_name, "---", user.national_code)
+
+        elif choice == "8":
+            try:
+                national_code = input("Enter User National Code: ")
+                new_user_name = input("Enter New Name: ")
+                if change_users_name(national_code, new_user_name):
+                    print("New user Name set")
+            except ValueError as e:
+                print(e)
+        elif choice == "9":
             break
