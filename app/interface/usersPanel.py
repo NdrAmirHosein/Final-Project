@@ -1,4 +1,5 @@
 from app.services.View_registered_vehicles_and_plates import *
+from app.services.retrive_cars_plates_users_information import negative_scores
 from app.services.generateplate import generatePlate
 
 def userPanel(nationalCode):
@@ -7,7 +8,8 @@ def userPanel(nationalCode):
         print("1. Generate Plate")
         print("2. View Registered Vehicles")
         print("3. View Plates Owned")
-        print("4. exit")
+        print("4. View Negative Scores")
+        print("5. exit")
 
         choice = input("Enter Your Choice: ")
 
@@ -32,6 +34,13 @@ def userPanel(nationalCode):
             plates = plate_owned(nationalCode)
             for plate in plates:
                 print(plate.plate, " ---> ", plate.active)
-
+        
         elif choice == "4":
+            try:
+                neg_scores = negative_scores(nationalCode)
+                print(f"Negative Scores: {neg_scores}")
+            except Exception as e:
+                print(e)
+
+        elif choice == "5":
             break

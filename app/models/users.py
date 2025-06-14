@@ -1,4 +1,3 @@
-from app.data_structures.stack import Stack
 from app.data_structures.array import Array
 
 
@@ -13,16 +12,15 @@ class User:
         self.password = password
 
 
-        self.driver = None
-        self.owner = None
-
+        self.driver = False
+        self.owner = False
 
         self.cars_owned = Array()
         self.plate_owned = Array()
 
-class Driver(User):
-    def __init__(self, name, l_name, birthday, national_code, licenseId, licenseIssueDate):
-        super().__init__(name, l_name, birthday, national_code)
-        self.licenseId = licenseId
-        self.licenseIssueDate = licenseIssueDate
-        self.violationHistory = Stack()
+        self.licenseId = None
+        self.license_issue_date = None
+        self.penalties = 0
+        self.blockdays = 0
+
+        self.violation_History = Array()

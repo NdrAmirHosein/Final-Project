@@ -75,3 +75,11 @@ def change_users_name(national_code, new_name):
         user.name = new_name
         return True
     raise ValueError("UserName Not Found In The Database!!!")
+
+
+def negative_scores(national_code):
+    user = get_one_user(national_code)
+    if user.driver:
+        return user.penalties
+    else:
+        raise ProcessLookupError ("You Are Not A Driver!")

@@ -59,6 +59,7 @@ def change_palte_atrr_and_history(plate_obj, carId, year):
     plate_obj.vehicleId = carId
     plate_obj.plateHistory.append(
         (carId, year)
+        #check shavad khahashan ba 
     )
 
 
@@ -71,6 +72,7 @@ def set_plate(carId, carName, year, plate_number, color, ownerNationalId):
     car_db = cars()
     user_db = usersDatabase()
     user_obj = user_db.getUser(ownerNationalId)
+    user_obj.owner = True
 
     append_car_history(user_obj, carId, ownerNationalId, plate_obj)
     change_palte_atrr_and_history(plate_obj, carId, check_year)

@@ -14,5 +14,5 @@ class plate:
 
         self.plateHistory = Array()
 
-        self.violationHistory = None
+        self.violationHistory = Array()
 
