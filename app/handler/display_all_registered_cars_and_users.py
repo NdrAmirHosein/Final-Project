@@ -13,7 +13,11 @@ def retrive_users_from_db():
 
 def get_one_user(national_code):
     users_db = usersDatabase()
-    return users_db.getUser(national_code)
+    user = users_db.getUser(national_code)
+    if user:
+        return user
+    else:
+        return False
 
 
 def plates_of_city(city_code):

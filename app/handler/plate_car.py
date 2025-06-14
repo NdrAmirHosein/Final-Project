@@ -1,10 +1,11 @@
 from datetime import datetime
 from app.models.car import car
-from app.models.carHistory import carHistory
 from app.Database.cars_database import cars
+from app.models.carHistory import carHistory
+from app.handler.plate_to_object import _plat
+from app.models.plateHistory import plateHistory
 from app.Database.plate_database import arrayBST
 from app.Database.users_database import usersDatabase
-from app.handler.plate_to_object import _plat
 
 def time():
     current_time = datetime.now()
@@ -54,12 +55,11 @@ def insert_car(car_db, carName, year, carId, plate_obj, color, ownedID):
         car(carName, year, carId, plate_obj, color, ownedID)
     )
 
-def change_palte_atrr_and_history(plate_obj, carId, year):
+def change_palte_atrr_and_history(plate_obj, carId, plate_assignment_date):
     plate_obj.active = True
     plate_obj.vehicleId = carId
     plate_obj.plateHistory.append(
-        (carId, year)
-        #check shavad khahashan ba 
+        plateHistory(carId, plate_assignment_date)
     )
 
 
@@ -77,5 +77,6 @@ def set_plate(carId, carName, year, plate_number, color, ownerNationalId):
     append_car_history(user_obj, carId, ownerNationalId, plate_obj)
     change_palte_atrr_and_history(plate_obj, carId, check_year)
     insert_car(car_db, carName, year, carId, plate_obj, color, ownerNationalId)
+
 
     return plate_obj.plate ,user_obj.name, user_obj.l_name

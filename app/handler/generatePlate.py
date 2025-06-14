@@ -1,7 +1,7 @@
 import random
 from app.Database.users_database import usersDatabase
 from app.Database.plate_database import arrayBST
-from app.Database.bloom_filter_duality import BF
+from app.Database.bloom_filter_plate_duality import BF
 from app.data_structures.array import Array
 from app.models.plate import plate
 
@@ -60,22 +60,25 @@ def check_incresing_decreasing(number):
 
 
 def makePlate(letter, number):
-    raw_plate = checkX(letter, number)
+    _number, _letter = checkX(letter, number)
     check_duality = BF()
-    if check_incresing_decreasing(raw_plate[0]):
+    if check_incresing_decreasing(_number):
         if check_duality.check_duality(str(number) + letter):
-            return True, raw_plate[0]
+            return True, _number
+        else:
+            return False, None
 
 
 
 def finall_plate(cityCode):
-    number = randNum()
-    letter = setLetter()
+    while True :
+        number = randNum()
+        letter = setLetter()
 
-    _plate = makePlate(letter, number)
-    if _plate[0]:
-        finall_plate = plate(str(_plate[1]), cityCode, letter)
-        return finall_plate
+        _flag, _number = makePlate(letter, number)
+        if _flag:
+            finall_plate = plate(str(_number), cityCode, letter)
+            return finall_plate
 
 
 

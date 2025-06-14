@@ -83,3 +83,5 @@ def negative_scores(national_code):
         return user.penalties
     else:
         raise ProcessLookupError ("You Are Not A Driver!")
+    
+# def show_plate_history()

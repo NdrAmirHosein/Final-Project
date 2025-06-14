@@ -1,5 +1,7 @@
 from app.services.retrive_cars_plates_users_information import *
+from app.services.driving_license import *
 from app.services.plate_car import *
+from app.services.signUp import signUp
 
 def adminlogin():
     while True:
@@ -8,10 +10,12 @@ def adminlogin():
 
         choice = input("Enter Your Choice: ")
         if choice == "1":
-            username = input("Enter Your Username: ")
-            password = input("Enter Your Password: ")
-            adminPage(username, password)
-
+            try:
+                username = input("Enter Your Username: ")
+                password = input("Enter Your Password: ")
+                adminPage(username, password)
+            except Exception as e:
+                print(e)
         elif choice == "2":
             break
 
@@ -31,7 +35,10 @@ def adminPage(username, password):
         print("6. Search Cars In Rnage Of Production Year")
         print("7. Display All Owners Of A City")
         print("8  Set New Name For User")
-        print("9. Exit")
+        print("9. Granting A Driving License")
+        print("10 Delete User License")
+        print("11 Display All Drivers")
+        print("12. Exit")
 
         choice = input("Enter Your Choice: ")
 
@@ -118,5 +125,35 @@ def adminPage(username, password):
                     print("New user Name set")
             except ValueError as e:
                 print(e)
+
         elif choice == "9":
+            try:
+                national_code = input("Enter User National Code: ")
+                licenseID, name = Issuance_driving_license(national_code)
+                if not licenseID:
+                    print("User Not Found")
+                    national_code, name = signUp()
+                    licenseID, name = Issuance_driving_license(national_code)
+                    print(f"LicenseID {licenseID} For New User {name} Has Been Created.")
+                else:
+                    print(f"LicenseID {licenseID} For User {name} Has Been Created.")
+            except Exception as e:
+                print(e)
+                
+        elif choice == "10":
+            try:
+                national_code = input("Enter User National Code: ")
+                check = delete_driving_license(national_code)
+                if check:
+                    print("User License Deleted Succesfully.")
+            except Exception as e:
+                print(e)
+        
+        elif choice == "11":
+            drivers = show_all_drivers()
+            print("Driver License  ---  National Code  ---  License Issue Date")
+            for driver in drivers:
+                print(driver.licenseId, "---", driver.national_code, "---", driver.license_issue_date)
+        
+        elif choice == "12":
             break
