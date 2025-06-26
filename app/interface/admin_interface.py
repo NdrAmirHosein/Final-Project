@@ -2,6 +2,7 @@ from app.services.retrive_cars_plates_users_information import *
 from app.services.driving_license import *
 from app.services.plate_car import *
 from app.services.signUp import signUp
+from app.services.violation import set_violation
 
 def adminlogin():
     while True:
@@ -10,12 +11,12 @@ def adminlogin():
 
         choice = input("Enter Your Choice: ")
         if choice == "1":
-            try:
+            # try:
                 username = input("Enter Your Username: ")
                 password = input("Enter Your Password: ")
                 adminPage(username, password)
-            except Exception as e:
-                print(e)
+            # except Exception as e:
+            #     print(e)
         elif choice == "2":
             break
 
@@ -38,7 +39,8 @@ def adminPage(username, password):
         print("9. Granting A Driving License")
         print("10 Delete User License")
         print("11 Display All Drivers")
-        print("12. Exit")
+        print("12 Set Violation ")
+        print("13. Exit")
 
         choice = input("Enter Your Choice: ")
 
@@ -154,6 +156,17 @@ def adminPage(username, password):
             print("Driver License  ---  National Code  ---  License Issue Date")
             for driver in drivers:
                 print(driver.licenseId, "---", driver.national_code, "---", driver.license_issue_date)
-        
+
         elif choice == "12":
+            # try:
+            licenseId = input("Enter The License ID (8 Numbers): ")
+            plate = input("Enter The Plate: ")
+            violationlevel = input("Enter Vioolation Level( Low-Medium-High ): ")
+            description = input("Description: ")
+            set_violation(licenseId, plate, violationlevel, description)
+            # except Exception as e:
+            #     print(e)
+
+        
+        elif choice == "13":
             break

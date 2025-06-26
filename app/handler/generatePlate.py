@@ -93,13 +93,16 @@ def check_cityCode_and_set_Plate(cityCode, nationalCode):
         index = array_index_generator(cityCode)
         db = usersDatabase()
         user = db.getUser(nationalCode)
-        if user.blockdays == 0:
-            user.plate_owned.append(plate)
-            plate_db = arrayBST()
-            plate_db.insert_plate(index, plate.plate, plate)
-            return plate.plate
+        if user.abslout_block != True:
+            if user.blockdays == 0:
+                user.plate_owned.append(plate)
+                plate_db = arrayBST()
+                plate_db.insert_plate(index, plate.plate, plate)
+                return plate.plate
+            else:
+                raise PermissionError(f"User Does Not Have Permission(Penalty Error; Banned For {user.blockdays}  Days)")
         else:
-            raise PermissionError(f"User Does Not Have Permission(Penalty Error; Banned For {user.blockdays}  Days)")
+            raise PermissionError("User Is Blocked")
     else:
         raise ValueError("\nError...!\nCity Code Is Invalide\n")
 

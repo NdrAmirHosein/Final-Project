@@ -1,12 +1,13 @@
 class violation:
-    def __init__(self, violationReason, penaltyPoints):
-        self.violationReason = violationReason
+    def __init__(self, violationId, licenceId, plate, violationDate, violationLevel,penalty_days, penaltyPoints, description):
+        self.violationId = violationId
+        self.violationLevel = violationLevel
+        self.penalty_days = penalty_days
         self.penaltyPoints = penaltyPoints
-        self.violationId = None # sath jarime
 
-        self.licenceId = None
-        self.plate = None
-        self.violationDate = None
-        self.description = None
+        self.licenceId = licenceId
+        self.plate = plate
+        self.violationDate = violationDate
+        self.description = description
         
     

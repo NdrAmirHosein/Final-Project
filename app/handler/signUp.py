@@ -39,7 +39,7 @@ def check_birthday_format(birthday):
     except ValueError:
         raise ValueError("\nBirthday must be in YYYY-MM-DD format\n")
     
-def change_type_birthday(birthday_str):
+def change_type_date(birthday_str):
     return datetime.strptime(birthday_str, "%Y-%m-%d").date()
     
 
@@ -49,8 +49,8 @@ def encryption(password):
 
 def setData(name, lName, birthday, nationalCode, password):
     if check_nationalCode(nationalCode) and check_len(password) and isPasswordValid(password) and check_birthday_format(birthday):
-        # data = User(name, lName, change_type_birthday(birthday), nationalCode, encryption(password))
-        data = User(name, lName, change_type_birthday(birthday), nationalCode, password)
+        # data = User(name, lName, change_type_date(birthday), nationalCode, encryption(password))
+        data = User(name, lName, change_type_date(birthday), nationalCode, password)
 
         db = usersDatabase()
         if db.setUser(data.national_code, data):

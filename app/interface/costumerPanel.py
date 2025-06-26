@@ -26,11 +26,14 @@ def costumerPanel():
                 print(e)
             check_and_name = login(national_code, password)
 
-            if check_and_name:
-                print(f"   Login successful! Welcome {check_and_name}\n")
-                userPanel(national_code)
-            else:    
-                print("\n      Error Log in...!\nUsername Or PassWord IS Wrong!\n")
+            try :
+                if check_and_name:
+                    print(f"   Login successful! Welcome {check_and_name}\n")
+                    userPanel(national_code)
+                else:    
+                    print("\n      Error Log in...!\nUsername Or PassWord IS Wrong!\n")
+            except PermissionError as e:
+                print(e)
 
         elif choice == "3":
             break

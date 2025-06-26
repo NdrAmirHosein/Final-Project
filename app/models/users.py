@@ -23,4 +23,17 @@ class User:
         self.penalties = 0
         self.blockdays = 0
 
+        self.abslout_block = False
+
         self.violation_History = Array()
+
+
+# class Driver:
+#     def __init__(self, User:User, licenseId, license_issue_date, penalties, blockdays):
+#         self.user = User
+#         self.licenseId = licenseId
+#         self.license_issue_date = license_issue_date
+#         self.penalties = 0
+#         self.blockdays = 0
+
+#         self.violation_History = Array()
