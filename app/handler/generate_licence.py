@@ -32,7 +32,7 @@ def set_licenceID_for_user(national_code):
         user.licenseId = licenseID
         user.license_issue_date = time()
 
-        drivers_db.setUser(licenseID, national_code)
+        drivers_db.setUser(str(licenseID), national_code)
 
         return licenseID, user.name
     else:

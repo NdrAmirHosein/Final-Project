@@ -40,7 +40,8 @@ def adminPage(username, password):
         print("10 Delete User License")
         print("11 Display All Drivers")
         print("12 Set Violation ")
-        print("13. Exit")
+        print("13. Block User")
+        print("14. Exit")
 
         choice = input("Enter Your Choice: ")
 
@@ -158,15 +159,21 @@ def adminPage(username, password):
                 print(driver.licenseId, "---", driver.national_code, "---", driver.license_issue_date)
 
         elif choice == "12":
-            # try:
-            licenseId = input("Enter The License ID (8 Numbers): ")
-            plate = input("Enter The Plate: ")
-            violationlevel = input("Enter Vioolation Level( Low-Medium-High ): ")
-            description = input("Description: ")
-            set_violation(licenseId, plate, violationlevel, description)
-            # except Exception as e:
-            #     print(e)
+            try:
+                licenseId = input("Enter The License ID (8 Numbers): ")
+                plate = input("Enter The Plate: ")
+                violationlevel = input("Enter Vioolation Level( Low-Medium-High ): ")
+                description = input("Description: ")
+                set_violation(licenseId, plate, violationlevel, description)
+            except Exception as e:
+                print(e)
 
-        
         elif choice == "13":
+            try:
+                national_code_or_licenseId = input("Enter National Code Or License ID: ")
+                print(block_user_by_admin(national_code_or_licenseId))
+            except ValueError as e:
+                print(e)
+
+        elif choice == "14":
             break

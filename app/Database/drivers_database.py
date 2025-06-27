@@ -12,8 +12,8 @@ class DrriverDatabase:
             self.initialized = True
             self.drivers_db = HashTable()
             
-    def setUser(self, licenseID, data):
-        self.drivers_db[licenseID] = data
+    def setUser(self, licenseID, national_code):
+        self.drivers_db[licenseID] = national_code
         return True
     
     def getUser(self, licenseID):

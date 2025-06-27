@@ -1,3 +1,4 @@
+from app.Database.drivers_database import DrriverDatabase
 from app.Database.users_database import usersDatabase
 from app.Database.plate_database import arrayBST
 from app.Database.cars_database import cars
@@ -26,3 +27,13 @@ def plates_of_city(city_code):
     plates_of_city = plates_db.retrive_information(city_code)
 
     return plates_of_city
+
+def get_one_driver(licenseID):
+    drivers_db = DrriverDatabase()
+    driver = drivers_db.getUser(licenseID)
+    if driver:
+        return driver
+    else:
+        return False
+    
+    # return drivers_db.getUser(licenseID) if drivers_db.getUser(licenseID) else False

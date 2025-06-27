@@ -1,5 +1,5 @@
 from app.services.View_registered_vehicles_and_plates import *
-from app.services.retrive_cars_plates_users_information import negative_scores
+from app.services.retrive_cars_plates_users_information import negative_scores,view_violation_history
 from app.services.generateplate import generatePlate
 
 def userPanel(nationalCode):
@@ -9,7 +9,8 @@ def userPanel(nationalCode):
         print("2. View Registered Vehicles")
         print("3. View Plates Owned")
         print("4. View Negative Scores")
-        print("5. exit")
+        print("5. View Violation History")
+        print("6. Exit")
 
         choice = input("Enter Your Choice: ")
 
@@ -41,6 +42,18 @@ def userPanel(nationalCode):
                 print(f"Negative Scores: {neg_scores}")
             except Exception as e:
                 print(e)
-
+        
         elif choice == "5":
+            try:
+                violation_history = view_violation_history(nationalCode)
+
+                print("Date Of Violation  ---  Plate Of Violation  --- Violation Level  --- Descreaption")
+                for violation in violation_history:
+                    print(violation.violationDate , " --- " , violation.plate.plate , " --- " , violation.violationLevel , " --- " , violation.description)
+            except LookupError as e:
+                print(e)
+            except AttributeError as ae:
+                print(ae)
+
+        elif choice == "6":
             break

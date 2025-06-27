@@ -84,4 +84,38 @@ def negative_scores(national_code):
     else:
         raise ProcessLookupError ("You Are Not A Driver!")
     
-# def show_plate_history()
+def view_violation_history(national_code):
+    user = get_one_user(national_code)
+
+    violation_history = user.violation_History
+    if user.driver:    
+        if len(violation_history) == 0:
+            raise LookupError("User Has No Violation History.")
+        else:
+            return violation_history
+    else:
+        raise AttributeError("You Are Not A Driver.")   
+
+
+def block_user_by_admin(national_code_or_licenseID):
+    if len(national_code_or_licenseID) == 10:
+        user = get_one_user(national_code_or_licenseID)
+        if user.abslout_block == True:
+            user.abslout_block = False
+            return "User Has Been UnBlocked"
+        else:
+            user.abslout_block = True
+            return "User Has Been Blocked"
+
+    elif len(national_code_or_licenseID) == 8:
+        national_code = get_one_driver(national_code_or_licenseID)
+        user = get_one_user(national_code)
+        if user.abslout_block == True:
+            user.abslout_block = False
+            return "User Has Been UnBlocked"
+        else:
+            user.abslout_block = True
+            return "User Has Been Blocked"
+    else:
+        raise ValueError("Invalide Input(Must Be 8 Or 10 numbers)")
+    
