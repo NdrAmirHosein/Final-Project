@@ -10,7 +10,9 @@ def userPanel(nationalCode):
         print("3. View Plates Owned")
         print("4. View Negative Scores")
         print("5. View Violation History")
-        print("6. Exit")
+        print("6. View Violation Of One Plate")
+        print("7. View Plate History")
+        print("8. Exit")
 
         choice = input("Enter Your Choice: ")
 
@@ -56,4 +58,53 @@ def userPanel(nationalCode):
                 print(ae)
 
         elif choice == "6":
+            try:
+                print("Plates Owned:\nPlates    ----      Status")
+                plates = plate_owned(nationalCode)
+                for plate in plates:
+                    print(plate.plate, " ---> ", plate.active)
+                if len(plates) != 0 :
+                    plate = input("Enter Your Plate: ")
+                    plate_violation_history = find_plate_violation(nationalCode, plate)
+                    if plate_violation_history != False:
+                        if len(plate_violation_history) == 0:
+                            print("There Is No Violation History For This Plate")
+
+                        elif type(plate_violation_history) == str:
+                            print(plate_violation_history)
+
+                        else:
+                            for violation in plate_violation_history:
+                                print(violation.violationDate , " --- " , violation.plate.plate , " --- " , violation.violationLevel , " --- " , violation.description)
+                    else:
+                        print("Not Such Plate Available")
+                else:
+                    print("You Dont Have Plate")
+
+            except ValueError as e:\
+            print(e)
+        
+        elif choice == "7":
+            try:
+                print("Plates Owned:\nPlates    ----      Status")
+                plates = plate_owned(nationalCode)
+                for plate in plates:
+                    print(plate.plate, " ---> ", plate.active)
+                if len(plates) != 0 :
+                    plate = input("Enter Your Plate: ")
+                    car_information, plate_history = retrive_plate_history(plate)
+                    if car_information and plate_history:
+                        print("\nCar and Plate History:")
+                        for i in range(len(car_information)):
+                            print(f"Car: {car_information[i].name}, Year: {car_information[i].productionYear}, Color: {car_information[i].color}")
+                            print(f"Assigned on: {plate_history[i].plate_assignment_date}\n")
+                    else:
+                        print("Not Such A Car Found")
+                else:
+                    print("You Dont Have Plate")
+                
+            except:
+                pass
+
+        elif choice == "8":
             break

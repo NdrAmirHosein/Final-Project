@@ -1,8 +1,8 @@
 from app.handler.plate_car import set_plate
 
-def plate_car(carId, carName, year, plate_number, color, ownerNationalID):
+def plate_car(carId, carName, year, plate_number, color):
 
-    return set_plate(carId, carName, year, plate_number, color, ownerNationalID)
+    return set_plate(carId, carName, year, plate_number, color)
     
 
 

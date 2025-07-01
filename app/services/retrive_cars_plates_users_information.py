@@ -119,3 +119,12 @@ def block_user_by_admin(national_code_or_licenseID):
     else:
         raise ValueError("Invalide Input(Must Be 8 Or 10 numbers)")
     
+
+
+def delete_car(carId):
+    return delete_car_fromDB(carId)
+
+def transaction_history(carId) -> list:
+    founded_car = transaction_historyDB(carId)
+
+    return founded_car.transactionHistory if len(founded_car.transactionHistory) != 0 else False

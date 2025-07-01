@@ -50,7 +50,7 @@ class BinarySearchTree:
             else:
                 pointer = pointer.right
         else:
-            raise IndexError("\nNot Such A Data is Available\n")
+            raise ValueError("\nNot Such A Data is Available\n")
         
 
         

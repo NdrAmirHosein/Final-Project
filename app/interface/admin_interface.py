@@ -1,6 +1,7 @@
 from app.services.retrive_cars_plates_users_information import *
 from app.services.driving_license import *
 from app.services.plate_car import *
+from app.services.transaction import transaction_car
 from app.services.signUp import signUp
 from app.services.violation import set_violation
 
@@ -35,13 +36,17 @@ def adminPage(username, password):
         print("5. Display All Cars Of A City")
         print("6. Search Cars In Rnage Of Production Year")
         print("7. Display All Owners Of A City")
-        print("8  Set New Name For User")
+        print("8.  Set New Name For User")
         print("9. Granting A Driving License")
-        print("10 Delete User License")
-        print("11 Display All Drivers")
-        print("12 Set Violation ")
+        print("10. Delete User License")
+        print("11. Display All Drivers")
+        print("12. Set Violation ")
         print("13. Block User")
-        print("14. Exit")
+        print("14. Transction")
+        print("15. Delete Car")
+        print("16. View Transaction History")
+        print("17. Exit")
+
 
         choice = input("Enter Your Choice: ")
 
@@ -55,11 +60,10 @@ def adminPage(username, password):
                 print("WT : White\nBC : Black\nRD : Red\nBL : Blue\nGR : Silver or Gray\nOT : Other")
                 color = input()
                 color = check_input_color(color)
-                ownerNationalID = input("Enter The Owner Nationial ID: ")
             except ValueError as e:
                 print(e)
 
-            datas = plate_car(carId, carName, year, plate_number, color, ownerNationalID)
+            datas = plate_car(carId, carName, year, plate_number, color)
             if datas:
                 print(f"Plate ({datas[0]}) Dedicated To Car {carName} For User: {datas[1]} {datas[2]}")
 
@@ -176,4 +180,40 @@ def adminPage(username, password):
                 print(e)
 
         elif choice == "14":
+            try:
+                carId_or_plateNumber = input("Enter CarId Or Plate Number: ")
+                newPlateNumber = input("Enter New Plate Number: ")
+
+                prevName, prevLName, nowName, nowLName, carName = transaction_car(carId_or_plateNumber, newPlateNumber)
+                print(f"Car {carName} Moved From {prevName} {prevLName} to {nowName} {nowLName}")
+            except ValueError as e:
+                print(e)
+        
+        elif choice == "15":
+            try:
+                carId = input("Enter CarId: ")
+                plate = delete_car(carId)
+                print(f"Plate {plate} For CarId {carId} Removed And Deactived")
+            except ValueError as e:
+                print(e)
+        
+        elif choice == "16":
+            try:
+                carId = input("Enter CarID: ")
+                transaction_history_list = transaction_history(carId)
+                if transaction_history_list:
+                    for transaction in transaction_history_list:
+                        print("\n--- Ownership Transfer Record ---")
+                        print(f"From        : {transaction.prev_owner}")
+                        print(f"To          : {transaction.now_owner}")
+                        print(f"Start Date  : {transaction.start_date}")
+                        print(f"End Date    : {transaction.endDate}")
+                        print(f"Old Plate   : {transaction.prev_plate.plate}")
+                        print(f"New Plate   : {transaction.now_plate.plate}")
+                else:
+                    print("No transaction history found for this CarID.")
+            except ValueError as e:
+                print(e)
+
+        elif choice == "17":
             break

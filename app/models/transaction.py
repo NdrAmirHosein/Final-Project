@@ -1,7 +1,8 @@
 class transaction:
-    def __init__(self, purchase_date, sale_data, previosOwner):
-        self.purchase_data = purchase_date
-        self.sale_data = sale_data
-        self.previosOwner = previosOwner
-    
-    
+    def __init__(self, prev_owner, now_owner, startDate, endDate, prev_plate, now_plate):
+        self.prev_owner = prev_owner
+        self.now_owner = now_owner
+        self.start_date = startDate
+        self.endDate = endDate
+        self.prev_plate = prev_plate
+        self.now_plate = now_plate

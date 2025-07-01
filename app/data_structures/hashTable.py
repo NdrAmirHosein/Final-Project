@@ -153,7 +153,6 @@ class HashTable:
         return len(self._pairs)
 
 
-
     @property
     def load_factor(self):
         occupied_or_deleted = 0

@@ -15,10 +15,7 @@ def retrive_users_from_db():
 def get_one_user(national_code):
     users_db = usersDatabase()
     user = users_db.getUser(national_code)
-    if user:
-        return user
-    else:
-        return False
+    return user if user else False
 
 
 def plates_of_city(city_code):
@@ -31,9 +28,19 @@ def plates_of_city(city_code):
 def get_one_driver(licenseID):
     drivers_db = DrriverDatabase()
     driver = drivers_db.getUser(licenseID)
-    if driver:
-        return driver
-    else:
-        return False
+    return driver if driver else False
+
+def delete_car_fromDB(carId) -> str:
+    cars_db = cars()
+    founded_car = cars_db.find(carId)
+    plate = founded_car.plateNumber
+    plate.active = False
+    plate.vehicleId = None
+    cars_db.delete(carId)
+    return plate.plate
     
-    # return drivers_db.getUser(licenseID) if drivers_db.getUser(licenseID) else False
+
+def transaction_historyDB(carId) -> object:
+    car_db = cars()
+    founded_car = car_db.find(carId)
+    return founded_car if founded_car else False

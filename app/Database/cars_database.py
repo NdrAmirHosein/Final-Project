@@ -18,3 +18,6 @@ class cars:
     
     def find(self, carId):
         return self.cars.search(carId).value.value
+    
+    def delete(self, carId) -> bool:
+        return self.cars.delete(carId)

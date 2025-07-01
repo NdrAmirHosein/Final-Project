@@ -25,12 +25,14 @@ def car_objs(nationalId):
     
     car_objs = Array()
     for car in cars:
-        car_obj = find_car_db(int(car))
-        if car_obj not in car_objs:
-            car_objs.append(
-                car_obj
-            )
-    
+            try:
+                car_obj = find_car_db(int(car))
+                if car_obj not in car_objs:
+                    car_objs.append(
+                        car_obj
+                    )
+            except ValueError:
+                pass
     return car_objs
 
 def plates_owned(nationalId):

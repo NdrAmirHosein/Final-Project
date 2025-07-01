@@ -12,5 +12,5 @@ class car:
         self.endDate = None
 
 
-        self.transactionDate = Array()
+        self.transactionHistory = Array()
         

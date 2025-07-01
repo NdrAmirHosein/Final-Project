@@ -95,6 +95,7 @@ def check_cityCode_and_set_Plate(cityCode, nationalCode):
         user = db.getUser(nationalCode)
         if user.abslout_block != True:
             if user.blockdays == 0:
+                plate.owner = nationalCode
                 user.plate_owned.append(plate)
                 plate_db = arrayBST()
                 plate_db.insert_plate(index, plate.plate, plate)
