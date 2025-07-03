@@ -13,13 +13,22 @@ class Stack:
     
     def pop(self):
         if self.pointer == 0:
-            raise IndexError
+            raise IndexError("UnderFlow")
         self.stack[self.pointer -1] = None
         self.pointer -= 1
         return True
     
     def size(self):
         return self.pointer + 1
+    
+    @property
+    def top(self):
+        if self.pointer == 0:
+            raise IndexError("Stack Is Empty")
+        return self.stack[self.pointer - 1]
+    
+    def __len__(self):
+        return self.pointer
         
     def __str__(self):
         return str(self.stack)

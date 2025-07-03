@@ -36,7 +36,7 @@ def adminPage(username, password):
         print("5. Display All Cars Of A City")
         print("6. Search Cars In Rnage Of Production Year")
         print("7. Display All Owners Of A City")
-        print("8.  Set New Name For User")
+        print("8. Set New Name For User")
         print("9. Granting A Driving License")
         print("10. Delete User License")
         print("11. Display All Drivers")

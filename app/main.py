@@ -5,6 +5,7 @@ from app.tests.read_car_records import read_car_records
 from app.tests.read_drivers_record import read_drivers_records
 from app.tests.read_penalties import read_peanlty_records
 
+
 read_user_data()
 read_ownership_car()
 read_car_records()

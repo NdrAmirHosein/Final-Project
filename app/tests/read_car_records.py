@@ -12,5 +12,5 @@ def read_car_records():
         plate = _plate(data["PlateNumber"], data["OwnerNationalID"])
         set_plate_first_time(plate.cityCode,data["OwnerNationalID"],plate.plate, plate)
     for data in datas:
-        print(set_plate(data["CarID"],data["CarName"],data["Year"],data["PlateNumber"],data["Color"]))
+        set_plate(data["CarID"],data["CarName"],data["Year"],data["PlateNumber"],data["Color"])
     
