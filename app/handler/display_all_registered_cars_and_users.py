@@ -2,6 +2,8 @@ from app.Database.drivers_database import DrriverDatabase
 from app.Database.users_database import usersDatabase
 from app.Database.plate_database import arrayBST
 from app.Database.cars_database import cars
+from app.data_structures.array import Array
+
 
 def retrive_cars_from_db():
     cars_db = cars()
@@ -11,6 +13,8 @@ def retrive_cars_from_db():
 def retrive_users_from_db():
     users = usersDatabase().usersDatabase
     return users.values
+
+
 
 def get_one_user(national_code):
     users_db = usersDatabase()

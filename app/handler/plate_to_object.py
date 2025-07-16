@@ -1,5 +1,5 @@
 from app.models.plate import plate
-def _plate(rawPlate, nationalcode=None):
+def _plate(rawPlate, nationalcode=None): #not my idea
     # plate_input = "34G653-61"
     rawPlate = rawPlate.replace(" ", "")
     plate_part, cityCode = rawPlate.split("-")  # "34G653", "61"

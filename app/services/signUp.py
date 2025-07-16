@@ -10,6 +10,6 @@ def signUp():
         if seted_data:
             return nationalCode, seted_data
         else:
-            return None
+            raise ValueError("Incorrect inputs")
     except ValueError as e:
         print(e)

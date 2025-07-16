@@ -4,6 +4,7 @@ from app.services.plate_car import *
 from app.services.transaction import transaction_car
 from app.services.signUp import signUp
 from app.services.violation import set_violation
+from app.handler.violation import block_more_than_twice
 
 def adminlogin():
     while True:
@@ -26,7 +27,7 @@ def adminPage(username, password):
     if username == "admin" and password == "admin":
         pass
     else:
-        raise ValueError("ridi admin jan")
+        raise ValueError("eshtebah kardi admin jan")
     
     while True:
         print("1. Plate A Car")
@@ -45,7 +46,8 @@ def adminPage(username, password):
         print("14. Transction")
         print("15. Delete Car")
         print("16. View Transaction History")
-        print("17. Exit")
+        print("17. blocking user more than twice")
+        print("18. Exit")
 
 
         choice = input("Enter Your Choice: ")
@@ -214,6 +216,12 @@ def adminPage(username, password):
                     print("No transaction history found for this CarID.")
             except ValueError as e:
                 print(e)
-
+        
         elif choice == "17":
+            try:
+                block_more_than_twice()
+            except Exception as e:
+                print(e)
+
+        elif choice == "18":
             break

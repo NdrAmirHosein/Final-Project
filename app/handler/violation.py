@@ -6,6 +6,8 @@ from app.Database.plate_database import arrayBST
 from app.services.driving_license import delete_driving_license
 from app.handler.plate_to_object import _plate
 from app.handler.signUp import change_type_date
+from app.handler.display_all_registered_cars_and_users import retrive_users_from_db
+from app.data_structures.array import Array
 
 import random
 
@@ -98,6 +100,24 @@ def set_user_and_plate_violation_first_time(violationid, licenseId, plate, viola
     user.penalties += violation_obj.penaltyPoints
     if user.penalties >= 500:
         delete_driving_license(user.national_code)
-        print("fucked up shodi")
+        print("blocked")
         user.abslout_block = True
     user.blockdays += violation_obj.penalty_days
+
+
+
+def block_more_than_twice():
+    users = retrive_users_from_db()
+    users_with_violation = Array()
+    for user in users:
+        if len(user.violation_History) > 2:
+            users_with_violation.append(user)
+    
+    for user in users_with_violation:
+        counter = 0
+        for violation in user.violation_History:
+            if violation.violationLevel == "High":
+                counter += 1
+        if counter >= 2:
+            delete_driving_license(user.national_code)
+        counter = 0
